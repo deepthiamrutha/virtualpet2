@@ -39,14 +39,24 @@ function setup() {
 
 function draw(){
  background(46,139,87);
-
- foodobject.display()
- 
+var feedTime=database.ref('FeedTime');
+feedTime.on("value",function(data){
+  Lastfeed=data.val();
+})
+ foodobject.display();
 textSize(30);
 fill("pink");
 text("Press the buttons on the top to feed the dog",200,100);
 text("Hey!!! I am drago can you feed me please",200,400);
-
+if(Lastfeed>=12){
+  text("last Fed :"+Lastfeed%12+"pm",500,450);
+}
+else if(Lastfeed===0){
+  text("last Fed : 12am",500,450);
+}
+else{
+  text("last Fed :"+Lastfeed+"pm",500,450);
+}
  drawSprites();
   
  fill(255,255,254);
